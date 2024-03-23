@@ -1,5 +1,10 @@
 ---
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
 
+const pageTitle = "BASE1";
 ---
 
 <html lang="en">
@@ -8,9 +13,22 @@
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>BASE1</title>
+		<title>{pageTitle}</title>
 	</head>
 	<body>
-		<h1>BASE1.com official site</h1>
+		<Header />
+
+		<h2>Every partner says they're different.
+			Let us show you that we really are.</h2>
+		<p>We're dedicated to advancing your business through transformative commerce and marketing solutions.</p>
+		<p>Our teams prioritize your goals, ensuring clear ownership, unmatched precision, and an obsessive commitment to success — with every project.</p>
+		<p>
+			We're industry-leading experts in SAP Emarsys and SAP Commerce Cloud. We're also experts in Google Cloud Platform, and we're the first Flutter developers to build a commerce-driven native mobile app framework (Flex).
+		</p>
+
+		<Footer />
+		<script>
+			import '../scripts/menu.js';
+		</script>
 	</body>
 </html>

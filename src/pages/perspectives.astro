@@ -1,0 +1,24 @@
+---
+import Header from '../components/Header.astro';
+import '../styles/global.css';
+
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>BASE1</title>
+	</head>
+    <body>
+        <Header/>
+
+        <h2>What's on our mind?</h2>
+        <p>We never stop thinking of ways to solve challenges, reduce costs, and improve enterprise commerce experiences.</p>
+		<script>
+			import '../scripts/menu.js';
+		</script>
+    </body>
+</html>
