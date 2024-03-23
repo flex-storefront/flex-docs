@@ -7,7 +7,7 @@ author: 'Stephen Richter'
 image:
     url: 'https://docs.astro.build/assets/full-logo-light.png'
     alt: 'The full Astro logo.'
-tags: ["hybris", "sap commerce cloud", "headless"]
+tags: ["hybris", "sap commerce", "headless"]
 ---
 
 If you are an SAP Commerce Cloud customer, you may have heard that the Accelerator UI storefronts are being deprecated. In this article, we discuss why that’s happening, and what steps you should take to begin planning for the future.
