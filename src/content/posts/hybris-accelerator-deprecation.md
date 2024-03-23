@@ -1,5 +1,4 @@
 ---
-layout: ../../layouts/MarkdownPostLayout.astro
 title: 'SAP Hybris Accelerator UI Deprecation'
 pubDate: 2024-03-20
 description: 'In this article, we discuss why that’s happening, and what steps you should take to begin planning for the future.'
