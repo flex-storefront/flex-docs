@@ -1,4 +1,5 @@
 ---
+import Greeting from '../components/Greetings';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import '../styles/global.css';
 
@@ -12,4 +13,5 @@ const pageTitle = "BASE1";
 	<p>
 		We're industry-leading experts in SAP Emarsys and SAP Commerce Cloud. We're also experts in Google Cloud Platform, and we're the first Flutter developers to build a commerce-driven native mobile app framework (Flex).
 	</p>
+  <Greeting client:load messages={["Hi", "Hello", "Howdy", "Hey there", "Howreyanow"]} />
 </BaseLayout>

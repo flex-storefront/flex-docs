@@ -1,7 +1,6 @@
 ---
-import Footer from "../components/Footer.astro";
-import Header from "../components/Header.astro";
 import BaseLayout from "./BaseLayout.astro";
+import { fade } from "astro:transitions";
 
 const { frontmatter } = Astro.props;
 ---
@@ -11,7 +10,7 @@ const { frontmatter } = Astro.props;
     <p>Published on {frontmatter.pubDate.toString().slice(0,10)}</p>
     <p>Written by {frontmatter.author}</p>
     
-    <div class="tag-row">
+    <div class="tag-row" transition:animate={fade({ duration: '1s' })}>
         {frontmatter.tags.map((tag: string) => <a href={`/tags/${tag}`} class="tag">{tag}</a>)}
     </div>
     
