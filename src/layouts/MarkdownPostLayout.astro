@@ -1,0 +1,36 @@
+---
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import BaseLayout from "./BaseLayout.astro";
+
+const { frontmatter } = Astro.props;
+---
+
+<BaseLayout pageTitle={frontmatter.title}>
+    <h1>{frontmatter.title}</h1>
+    <p>Published on {frontmatter.pubDate.toString().slice(0,10)}</p>
+    <p>Written by {frontmatter.author}</p>
+    
+    <div class="tag-row">
+        {frontmatter.tags.map((tag: string) => <span class="tag">{tag}</span>)}
+    </div>
+    
+    <slot />
+</BaseLayout>
+    
+
+
+<style>
+    .tag-row {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .tag {
+      padding: 0.5rem 1rem;
+      color: white;
+      background-color: blue;
+      text-decoration: none;
+    }
+  </style>

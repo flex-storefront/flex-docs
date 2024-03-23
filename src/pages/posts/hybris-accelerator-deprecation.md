@@ -1,4 +1,5 @@
 ---
+layout: ../../layouts/MarkdownPostLayout.astro
 title: 'SAP Hybris Accelerator UI Deprecation'
 pubDate: 2024-03-20
 description: 'In this article, we discuss why that’s happening, and what steps you should take to begin planning for the future.'
@@ -8,9 +9,6 @@ image:
     alt: 'The full Astro logo.'
 tags: ["hybris", "sap commerce cloud", "headless"]
 ---
-# SAP Hybris Accelerator UI Deprecation
-
-Published on: 2024-03-20
 
 If you are an SAP Commerce Cloud customer, you may have heard that the Accelerator UI storefronts are being deprecated. In this article, we discuss why that’s happening, and what steps you should take to begin planning for the future.
 

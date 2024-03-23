@@ -1,5 +1,6 @@
 ---
 import Header from '../components/Header.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 import '../styles/global.css';
 
 const pageTitle = "About BASE1";
@@ -13,33 +14,15 @@ const company = {
 const hqColor = 'green';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{pageTitle}</title>
-        <style define:vars={{hqColor}}>
-            h1 {
-                color: purple;
-                font-size: 4rem;
-            }
-            .hq {
-                color: var(--hqColor);}
-        </style>
-	</head>
-    <body>
-        <Header />
+<style define:vars={{hqColor}}>
+    .hq { color: var(--hqColor); }
+</style>
 
-        <h1>{pageTitle}</h1>
-        <h2>... and my new Astro site!</h2>
-      
-        <p>We are a team of <b>{company.teamSize}</b> humans making eCommerce better globally.</p>
-      
-        <p>We are headquartered in <span class="hq">{company.headquarters}</span></p>
-        <script>
-			import '../scripts/menu.js';
-		</script>
-    </body>
-</html>
+<BaseLayout pageTitle={pageTitle}>
+    <h1>{pageTitle}</h1>
+    <h2>... and my new Astro site!</h2>
+  
+    <p>We are a team of <b>{company.teamSize}</b> humans making eCommerce better globally.</p>
+  
+    <p>We are headquartered in <span class="hq">{company.headquarters}</span></p>
+</BaseLayout>
