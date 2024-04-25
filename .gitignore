@@ -12,6 +12,12 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+# firebase
+firebase/
+.firebase
+# Firebase Hosting
+.firebaserc
+firebase-debug.log
 
 # environment variables
 .env

@@ -8,6 +8,7 @@ export default defineConfig({
 			title: 'Flex Storefront',
       tagline: 'Build a native mobile eCommerce apps in up to 80% less time.',
       description: 'Flex is a native mobile app platform for SAP Commerce Cloud built in Flutter.',
+      favicon: '/images/favicon.ico',
       logo: {
         light: './src/assets/flex_logo.png',
         dark: './src/assets/flex_logo_rev.png',
