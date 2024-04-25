@@ -1,5 +1,5 @@
 ---
-title: Tech stack
+title: Tech Stack
 description: The technical stack used within Flex.
 sidebar:
   order: 3

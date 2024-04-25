@@ -31,10 +31,10 @@ export default defineConfig({
 					label: 'Getting started',
 					autogenerate: { directory: 'getting-started' },
 				},
-				{
-					label: 'Storefront',
-					autogenerate: { directory: 'storefront' },
-				},
+        {
+          label: 'Storefront',
+          autogenerate: { directory: 'storefront' },
+        },
 			],
 		}),
 	],

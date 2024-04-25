@@ -1,0 +1,124 @@
+---
+title: Code Organization
+description: A reference page in my new Starlight docs site.
+sidebar:
+  order: 2
+---
+
+import { FileTree } from '@astrojs/starlight/components';
+
+This page described the code organization we choose for Flex Storefront app accelerator. This code organization follows some key principles:
+
+- Separation between view and business logic,
+- Reusability (DRY) and Scalability,
+- Easy to navigate through the folder structure.
+
+At the root level, inside `lib/`, there are 3 folders:
+
+* `modules/` containing the business logic,
+* `pages/` containing the view
+* `ui/` containing the re-usable widgets used in the pages.
+
+## 1. Modules
+
+`modules/` contains a folder per feature or API domain (authentication, user, cart, localization, messaging, store locator,  settings, etc.).
+
+A module is essentially made of a Bloc (or a cubit if it's simple), a service and a model class.
+
+### 1.1 Bloc/Cubit
+
+Each bloc should follow the single responsibility principle. To avoid the "spider web effect" and keep the code clear, a bloc should be either:
+
+* Scoped to the entire app ("global bloc")
+* Scoped to a page ("page bloc")
+
+The page bloc is useful when we can have multiple instances of the bloc (like SearchBloc handling the search result: the user can search for shirts, then for pants, then get back to the "shirts" search results)
+
+When a piece of data from a page Bloc is required in another page, the bloc is "lifted" to a global bloc
+
+### 1.2 Service
+
+The "service" is the singleton interacting with the end. For instance, in the user module, we have the `UserService` containing `fetchUserById`, `updateUser`, etc. Those methods directly uses the http client to perform network request.
+
+The service doesn't hold data, the bloc does. It means the single source of truth is the combination of all blocs' states (like the Redux state in a Redux app).
+
+### 1.3 Model
+
+The models are shaped from the API responses. They are used all across the app (the `User` instance returned by the `UserService` is stored in the `UserBloc` state, and it used in the views).
+
+The models are directly used in the widgets, there is no "model to entity" or "model to DTO" conversion. If the view is in need of a model transformation or a model aggregation, the bloc state would fulfill this role.
+
+## 2. Pages
+
+### 2.1 General structure (folders)
+
+The folders inside `pages/` strictly follows the navigation structure: one subfolder for each top level route:
+
+<FileTree>
+- pages
+    - cart/
+    - checkout/
+    - login/
+    - home/
+</FileTree>
+
+If the top level route has a nested navigator, then the corresponding folder has a subfolder for each route of the nested navigator.
+
+Our home page has a bottom navbar, so most of the pages are in the `pages/home/` folder:
+
+* `pages/home/featured`
+* `pages/home/shop`
+* `pages/home/my_account`
+* `pages/home/store_locator`
+
+And the Shop route is actually a nested navigator so there is a third level of routes:
+
+* `pages/home/shop/category_list`
+* `pages/home/shop/product_list`
+* `pages/home/shop/product_detail`
+
+Generally speaking, when the developer has the app opens and is looking for "where is the code for this page?", he just have to find his way inside the folder structure just like he found his way to the page in the app.
+
+### 2.2 Folder content (widget files)
+
+Inside a folder, the Page / View / Content pattern provides a clean way to link and use blocs inside the widgets:
+
+* `Page` widget is the widget declared in the route definition. This widget instantiates the `View` widget (see below) eventually surrounded by the PageBloc declaration or any data/context providers
+* `View` widget for Listeners, Consumers, and content builders based on state (i.e. loading, failed, success)
+* `Content` widgets for actually displaying content (or Shimmer skeleton, or failure page) based of the state.
+
+In case the page widget is only instantiating the corresponding view widget, the 2 widgets can be declared in the same file.
+
+Example for `my_account/`:
+
+* `MyAccountPage`
+* `MyAccountView` declares a `BlocBuilder<UserBloc, UserState>`
+* `MyAccountAnonymousContent`: displays a message "please connect" and the login button
+* `MyAccountLoadingContent`: displays a loader
+* `MyAccountAuthenticatedContent` displays the actual "My Account" page
+
+## 3. Reusable UI
+
+Each page folder mentioned in the previous part has a `widgets/` folder containing the widgets used in the content widgets, but if the piece of UI also appears in another page, then the corresponding widget is "lifted" inside the `ui/` folder.
+
+This `ui/` folder is our design system, each page are as much as possible built from widgets of this section.
+
+## Additional notes
+
+### Featured-based
+
+Business logic is 100% separated from the view. The structure is not 100% feature-based, but it is feature-based only inside the `modules/` folder. That's because the pages doesn't always follow this logic.
+
+Example: The "login" page uses the "user" bloc and the "authentication" bloc, then the feature name could be "auth", "user" or "login". It's confusing, and potentially a "feature folder" like "user" would become enormous over time.
+
+Instead we have:
+
+* `pages/login/`
+* `modules/user`
+* `modules/authentication`
+
+### Clean architecture
+
+This code convention can be seem as a lightweight version of the clean architecture: more like a "layered architecture", some simplification has been deliberately made to remove the "pass-through/conversion"-only layer, like the repository layer often ended up when the Clean Architecture is used for a simple application.
+
+However, the Clean Architecture principle can still be implemented if the need arises (interchangeable backend, complex models, etc.).

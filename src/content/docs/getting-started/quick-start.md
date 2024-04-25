@@ -1,5 +1,5 @@
 ---
-title: Quick start
+title: Quick Start
 description: A quick start to getting up and running with Flex.
 sidebar:
   order: 2
