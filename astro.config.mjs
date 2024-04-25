@@ -22,20 +22,18 @@ export default defineConfig({
           label: 'Introduction',
           items: [
             { label: 'Overview', link: '/introduction/overview' },
+            { label: 'Architecture', link: '/introduction/architecture' },
             { label: 'Roadmap', link: '/introduction/roadmap' },
             { label: 'FAQ', link: '/introduction/faq' },
           ],
         },
 				{
-					label: 'Guides',
-					items: [
-						// Each item here is one entry in the navigation menu.
-						{ label: 'Example Guide', link: '/guides/example/' },
-					],
+					label: 'Getting started',
+					autogenerate: { directory: 'getting-started' },
 				},
 				{
-					label: 'Reference',
-					autogenerate: { directory: 'reference' },
+					label: 'Storefront',
+					autogenerate: { directory: 'storefront' },
 				},
 			],
 		}),
