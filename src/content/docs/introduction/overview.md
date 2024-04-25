@@ -3,11 +3,11 @@ title: Flex Overview
 description: An overview of Flex.
 ---
 
-Flex is a **native mobile app** storefront for SAP Commerce Cloud built in Flutter.
+Flex is a **native mobile app** frontend-as-a-service for SAP Commerce Cloud.
 
 The goal of Flex is to help commerce professionals build **modern, performant, and scalable** mobile apps in order to unlock B2B and B2C omni-channel use cases.
 
-This accelerator aims to significantly **reduce development time** for commerce applications by giving developers a head start on core components and features, while **reducing the long term total cost of ownership** thanks to development in a **single codebase**.
+Flex aims to significantly **reduce development time** for commerce applications by giving developers a head start on core components and features, while **reducing the long term total cost of ownership** thanks to development in a **single codebase**.
 
 - **Headless**. Flex Storefront's default integration is SAP Cloud Commerce (Hybris), but it is compatible with any backend that has an API.
 
@@ -21,18 +21,13 @@ This site contains all technical documentation related to the setup, deployment 
 > We're a global team of experts specializing in eCommerce and committed to delivering projects that
 > move your business forward. Learn more about [why we built Flex](/blog/why-we-built-flex).
 
-## Core Concepts
+## Key Benefits
 
-Flex is a platform that powers your full eCommerce mobile experience.
+There are three key benefits of using Flex to power your eCommerce mobile app(s):
 
-- `flex/storefront`: the storefront accelerator Flutter application, which contains everything you need to build and run a modern eCommerce app on iOS and Android.
-
-- `flex/features`: composable commerce packages used to build your ideal eCommerce experience. Examples: 
-    - `flex_cms` - enable business and marketing users to configure, adjust and schedule content changes
-    - `flex_catalog` - powers the browse, products, and search customer journeys
-    - `flex_flyers` - manage and promote product sales with digital flyers built-in to Flex
-
-- `flex/adapters`: our officially supported adapter packages to connect with existing backends like SAP Commerce, Shopify, and more.
+1. **Accelerated Development**: Build and deploy up to 80% faster with prebuilt commerce features and solutions, all battle-tested using modern best practices.
+2. **Maintainable Codebase**: Decrease total cost of ownership through a single, clean codebase with a large developer community and package ecosystem to fuel growth.
+3. **Amazing Customer Experience**: Provide customers with a fast, smooth and consistent native experience across all mobile devices - not a web experience jammed into an app.
 
 ## Support
 

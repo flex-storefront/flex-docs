@@ -1,9 +1,11 @@
 ---
-title: Flex Storefront Features
+title: Features Overview
 description: Provides an overview of out-of-the-box storefront features.
 sidebar:
-  order: 1
+  order: 5
 ---
+
+> **Note: Flex Storefront documentation is under active development. Expect to see more feature documentation in the coming weeks prior to the 2211.1.0 Release.**
 
 Flex Storefront provides you with a starting point and accelerator to build amazing mobile eCommerce experiences.
 

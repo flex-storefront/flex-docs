@@ -2,7 +2,7 @@
 title: Global Configuration
 description: Learn how to configure your Flex Storefront app.
 sidebar:
-  order: 3
+  order: 2
 ---
 
 Flex Storefront configuration feature, backed by Firebase Remote Config, allows you to change the behavior and appearance of your app without publishing an app update. This short guide explains how to set up Firebase Remote Config for use in a Flutter app and provides examples of configuration fields that could be used in an ecommerce app.
