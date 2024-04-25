@@ -1,36 +1,38 @@
 ---
-title: Welcome to Starlight
+title: Flex Documentation
 description: Get started building your docs site with Starlight.
 template: splash
 hero:
-  tagline: Congrats on setting up a new Starlight project!
+  tagline: Flex is a native mobile Frontend-as-a-Service that provides templates, code, and tools that help you build modern, scalable and customizable eCommerce mobile apps.
   image:
-    file: ../../assets/houston.webp
+    file: ../../assets/hero_animated.gif
   actions:
-    - text: Example Guide
+    - text: Get started
       link: /guides/example/
       icon: right-arrow
       variant: primary
-    - text: Read the Starlight docs
-      link: https://starlight.astro.build
+    - text: Talk to an expert
+      link: https://base1.com/contact
       icon: external
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
 
-## Next steps
+## Products
 
-<CardGrid stagger>
-	<Card title="Update content" icon="pencil">
-		Edit `src/content/docs/index.mdx` to see this page change.
+<CardGrid>
+  <LinkCard
+    title="What is Flex?"
+    description="New to Flex? Learn how Flex helps you build commerce mobile apps 80% faster in the Flex Docs"
+    href="/guides/example/" />
+	<Card title="Flex Storefront" icon="pencil">
+		Build your eCommerce app on top of a modern, native mobile app accelerator written in Flutter.
 	</Card>
-	<Card title="Add new content" icon="add-document">
-		Add Markdown or MDX files to `src/content/docs` to create new pages.
+	<Card title="Flex UI" icon="add-document">
+		Take advantage of a variety of out-of-the-box widgets built specifically for commerce apps, and customize to your brand.
 	</Card>
-	<Card title="Configure your site" icon="setting">
-		Edit your `sidebar` and other config in `astro.config.mjs`.
+	<Card title="Flex for Enterprise" icon="setting">
+		Ready to build, customize, deploy and scale your enterprise apps? [Talk to an expert](https://base1.com/contact) to see how we can help.
 	</Card>
-	<Card title="Read the docs" icon="open-book">
-		Learn more in [the Starlight Docs](https://starlight.astro.build/).
-	</Card>
+
 </CardGrid>
