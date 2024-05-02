@@ -7,7 +7,7 @@ This page walks you throught the process of content administration. This feature
 
 The core of the feature relies on the concept of [Dynamic Zone](https://docs.strapi.io/dev-docs/api/entity-service/components-dynamic-zones) in Strapi. A dynamic zone is made of instances of pre-defined components in Strapi.
 
-The Flex app accelerator contains the UI counter-part for each of these components, allowing administrators to quickly and easily declare app content that will be shown in the app.
+Flex Storefront contains the Flex UI counterpart for each of these components, allowing administrators to quickly and easily declare app content that will be shown in the app.
 
 ## Prerequisites
 - Basic understanding of Flutter development.
@@ -28,7 +28,7 @@ The Flex app accelerator contains the UI counter-part for each of these componen
 
 ## Flutter implementation
 
-Flex app accelerator provides a default widget renderer for each component:
+Flex Storefront provides a default widget renderer for each component:
 
 | Model               | Widget                          | Example                                             |
 |---------------------|---------------------------------|-----------------------------------------------------|
@@ -40,7 +40,7 @@ Flex app accelerator provides a default widget renderer for each component:
 
 ## Steps
 
-- In the page containing the CMS content, declare a BlocProvider and instanciate a `CmsCubit`, the cubit needs the code of the single type. It is the API ID shown in the Strapi admin console (with our example: `homepage`):
+- In the page containing the CMS content, declare a `BlocProvider` and instantiate a `CmsCubit`, the cubit needs the code of the single type. It is the API ID shown in the Strapi admin console (with our example: `homepage`):
 
 ```dart
 BlocProvider<CmsCubit>(
@@ -49,7 +49,7 @@ BlocProvider<CmsCubit>(
 )
 ```
 
-- Define a `BlocBuilder<CmsCubit, CmsState>` at the location you want the content to be displayed. The `state` variable contains a list of `CmsData` model instances, one for each component that has been declared in Strapi admin console. Flex app accelerator provides a default widget renderer for each component:
+- Define a `BlocBuilder<CmsCubit, CmsState>` at the location you want the content to be displayed. The `state` variable contains a list of `CmsData` model instances, one for each component that has been declared in Strapi admin console. Flex Storefront provides a default widget renderer for each component:
 
 ```dart
 BlocBuilder<CmsCubit, CmsState>(
@@ -65,7 +65,7 @@ BlocBuilder<CmsCubit, CmsState>(
 )
 ```
 
-- For more customization, it is possible to not use the default renderer and define a custom widget:
+- For more customization, it is possible to define your own custom widget(s):
 
 ```dart
 BlocBuilder<CmsCubit, CmsState>(
