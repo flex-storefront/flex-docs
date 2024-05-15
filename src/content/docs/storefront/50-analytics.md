@@ -5,7 +5,11 @@ sidebar:
   order: 50
 ---
 
-Being an eCommerce app accelerator, Flex Storefront supports analytics events to gain valuable insights into user behavior and app performance.
+Flex Storefront supports analytics events to gain valuable insights into user behavior and app performance.
+
+By default, Google Analytics 4 is used to measure features and behaviour and generate useful reports with the provided data. The following
+events are triggered automatically when using the Storefront, and can be turned off or customized inside their
+[bloc, cubit or repository](../40-state-management).
 
 ## Supported events
 
