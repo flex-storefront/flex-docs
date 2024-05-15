@@ -2,7 +2,7 @@
 title: State Management
 description: Learn how Flex Storefront handles state management.
 sidebar:
-  order: 4
+  order: 40
 ---
 
 In Flex Storefront, managing the application's state efficiently is crucial for providing a smooth user experience. In order to keep our code clean and easy to read, we use the [bloc library](https://bloclibrary.dev/) to separate our application into three layers:

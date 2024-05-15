@@ -2,7 +2,7 @@
 title: Routing & Navigation
 description: Learn how Flex Storefront handles routing and navigation.
 sidebar:
-  order: 3
+  order: 30
 ---
 
 In Flex Storefront, navigation and routing are handled efficiently using the `auto_route` package. This documentation provides a brief overview of how `auto_route` is utilized for routing and navigation in the app.
