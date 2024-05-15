@@ -2,7 +2,7 @@
 title: Features Overview
 description: Provides an overview of out-of-the-box storefront features.
 sidebar:
-  order: 5
+  order: 60
 ---
 
 > **Note: Flex Storefront documentation is under active development. Expect to see more feature documentation in the coming weeks prior to the 2211.1.0 Release.**
