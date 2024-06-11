@@ -3,7 +3,7 @@ title: CMS
 description: Learn how to display custom content in the application.
 ---
 
-This page walks you throught the process of content administration. This feature allows you to display native content that is remotely administrated in Strapi CMS.
+This page walks you through the process of content administration. This feature allows you to display native content that is remotely administrated in Strapi CMS.
 
 The core of the feature relies on the concept of [Dynamic Zone](https://docs.strapi.io/dev-docs/api/entity-service/components-dynamic-zones) in Strapi. A dynamic zone is made of instances of pre-defined components in Strapi.
 
