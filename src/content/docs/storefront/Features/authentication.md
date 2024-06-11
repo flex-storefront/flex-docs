@@ -3,7 +3,7 @@ title: Authentication
 description: How to authenticate the user
 ---
 
-This documentation explains the authentication works in Flex Storefront and how to the user from SAP Commerce Cloud
+This documentation explains the authentication works in Flex Storefront and how to fetch the user from SAP Commerce Cloud.
 
 ## Prerequisites
 - Basic understanding of Flutter development.
@@ -12,17 +12,17 @@ This documentation explains the authentication works in Flex Storefront and how 
 
 ## Configuration
 
-Flex Storefront uses the OAuth protocol to connect to Commerce Cloud (or any OAuth-compliant backend infrastructure). The project needs to be configured with those keys in the `.env` file:
+Flex Storefront uses the OAuth protocol to connect to Commerce Cloud (or any OAuth-compliant backend infrastructure). The project needs to be configured with the following keys in the `.env` file:
 
 - `HYBRIS_BASE_URL`: Base URL of the Commerce Cloud backend
 - `HYBRIS_CLIENT_ID`: OAuth client ID created in the Backoffice
 - `HYBRIS_CLIENT_SECRET`: OAuth client secret created in the Backoffice
 
-On app startup, the app checks for a valid token on the app storage, then the HTTP client is configured with the `Authorization` header. So all user-related route can use the shortcut value `current`. Example: `/occ/v2/catalog/users/current/orders`
+On app startup, Flex Storefront checks for a valid token within the secure app storage, then the HTTP client is configured with the `Authorization` header. Following this, all user-related routes can use the shortcut value `current`. Example: `/occ/v2/catalog/users/current/orders`
 
 ## Login state
 
-The `AuthRepository` is the unique source of truth know whether the user is logged in or anonymous. This repository is a singleton with the same lifetime as the application. It must be init on startup with `instance.init()`. This method must be executed prior to any network requests.
+The `AuthRepository` is the single source of truth to know whether the user is logged in or anonymous. This repository is a singleton with the same lifetime as the application. It must be initialized on startup with `instance.init()`. This method must be executed prior to any network requests being made.
 
 ### Authentication status in the UI
 
@@ -34,7 +34,9 @@ final authStatus = GetIt.instance.get<AuthRepository>().currentAuthStatus;
 
 ### Authentication status in Blocs/Cubits
 
-While it is still possible to perform a "one-time read" like the declaration above, in the state management layer, we generally want the real-time update of the authentication status. Example: load the user when the user logs in or load the anonymous cart when the user logs out.
+While it is still possible to perform a "one-time read" like the declaration above, in the state management layer, we generally want the real-time update of the authentication status.
+
+Example: loading the user data when the user logs in or load the anonymous cart when the user logs out.
 
 To do this, the `AuthRepository` exposes a stream that can be listened to in the bloc/cubit constructor:
 
@@ -50,7 +52,7 @@ AccountCubit() : super(AccountState(status: Status.initial)) {
 
 ### Authentication status in navigation
 
-Those pages are generally accessible only if the user is logged in (Checkout, Order history, My Account, etc.). To protect a route to be accessible while anonymous, simply declare an instance of `AuthGuard` on the route definition:
+We can protect routes which we want to be accessible only if the user is logged in (i.e. Checkout, Order history, My Account, etc.). Simply declare an instance of `AuthGuard` on the route definition:
 
 ```dart
 AutoRoute(
