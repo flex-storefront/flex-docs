@@ -1,0 +1,39 @@
+---
+title: Image
+---
+import Preview from '../../../components/FlutterPreview.astro';
+import { LinkButton } from '@astrojs/starlight/components';
+
+Displays an Image from a local or remote source, handles caching, loading and errors.
+
+<LinkButton href="https://github.com/flex-storefront/flex_ui/blob/main/lib/widgets/image/image.dart">Component source \</></LinkButton>
+
+## Installation
+
+To install with [Mason CLI](https://pub.dev/packages/mason_cli), run the following:
+
+```zsh
+mason make flex_ui --component image
+```
+
+To install manually, copy and paste the component source files linked at the top of this page into your Flutter project.
+
+## Dependencies
+
+This component uses the following dependencies by default:
+1. [CachedNetworkImage](https://pub.dev/packages/cached_network_image) for increased performance
+2. [Shimmer](https://pub.dev/packages/shimmer) to display a nice animation while loading
+
+## Examples
+
+### Default
+
+<Preview src="https://flex-ui-playground.web.app/image" minHeight="400px">
+ ```dart
+FlexImage(
+  'https://unsplash.it/640/320',
+  width: 640,
+  height: 320,
+),
+```
+</Preview>
