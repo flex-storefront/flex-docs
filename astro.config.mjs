@@ -37,7 +37,12 @@ export default defineConfig({
           autogenerate: { directory: 'storefront' },
         },
         {
-          label: 'FLEX UI',
+          label: 'Features',
+          autogenerate: { directory: 'features' },
+        },
+        {
+          label: 'Flex UI',
+          badge: { text: 'Open Source' },
           autogenerate: { directory: 'ui' },
         },
 			],

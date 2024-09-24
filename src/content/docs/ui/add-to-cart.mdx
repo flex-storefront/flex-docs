@@ -4,10 +4,25 @@ sidebar:
   order: 1
 ---
 import Preview from '../../../components/FlutterPreview.astro';
+import { LinkButton } from '@astrojs/starlight/components';
 
-Displays an Add to Cart button.
+Displays an Add to Cart button featuring loading and disabled states.
 
-## Default
+<LinkButton href="https://github.com/flex-storefront/flex_ui/blob/main/lib/widgets/add_to_cart_button.dart">Component source \</></LinkButton>
+
+## Installation
+
+To install with [Mason CLI](https://pub.dev/packages/mason_cli), run the following:
+
+```zsh
+mason make flex_ui --component add_to_cart_button
+```
+
+To install manually, copy and paste the component source files linked at the top of this page into your Flutter project.
+
+## Examples
+
+### Default
 
 <Preview src="https://flex-ui-playground.web.app/add-to-cart">
  ```dart
