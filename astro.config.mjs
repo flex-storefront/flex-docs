@@ -36,6 +36,10 @@ export default defineConfig({
           label: 'Storefront',
           autogenerate: { directory: 'storefront' },
         },
+        {
+          label: 'FLEX UI',
+          autogenerate: { directory: 'ui' },
+        },
 			],
 		}),
 	],
