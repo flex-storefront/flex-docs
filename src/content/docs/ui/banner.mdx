@@ -1,0 +1,55 @@
+---
+title: Banner
+---
+import Preview from '../../../components/FlutterPreview.astro';
+import { LinkButton } from '@astrojs/starlight/components';
+
+Displays a customizable banner for an impactful visual, made at minimum with a title and an image.
+
+<LinkButton href="https://github.com/flex-storefront/flex_ui/blob/main/lib/widgets/banner/banner.dart">Component source \</></LinkButton>
+
+## Installation
+
+To install with [Mason CLI](https://pub.dev/packages/mason_cli), run the following:
+
+```zsh
+mason make flex_ui --component banner
+```
+
+To install manually, copy and paste the component source files linked at the top of this page into your Flutter project.
+
+## Dependencies
+
+### Internal
+
+This component relies on some Flex UI primitive components:
+1. [FlexImage](/ui/image)
+2. [FlexButton](/ui/button) (TODO)
+
+## Properties
+
+Name|Type|Description
+----|----|-----------
+`title`|`String`|Title of the banner
+`image`|[`FlexImage`](/ui/image)|Image of the banner
+`orientation`|[`Axis?`](https://api.flutter.dev/flutter/painting/Axis.html)|The banner can be horizontal or vertical (default: horizontal)
+`imageLayout`|`FlexBannerImageLayout`|The image can be placed after the rest of the elements, or before (default: after)
+`theme`|[`CardTheme`](https://api.flutter.dev/flutter/material/CardTheme-class.html)|The banner leverages the Material theme for its styling (elevation, rounded corners, background color, etc.). The provided instance is merged with the one inherited from the app
+
+
+## Examples
+
+### Default
+
+<Preview src="https://flex-ui-playground.web.app/banner" minHeight="400px">
+ ```dart
+FlexBanner(
+  title: 'Halloween specials!',
+  image: FlexImage(
+    'https://unsplash.it/320/280',
+    width: 320,
+    height: 280,
+  ),
+)
+```
+</Preview>
