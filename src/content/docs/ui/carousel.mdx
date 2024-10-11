@@ -1,0 +1,62 @@
+---
+title: Carousel
+---
+import Preview from '../../../components/FlutterPreview.astro';
+import { LinkButton } from '@astrojs/starlight/components';
+
+Displays a horizontal carousel. The component has different options for visual customization. It is agnostic of the content of the items.
+
+<LinkButton href="https://github.com/flex-storefront/flex_ui/blob/main/lib/widgets/carousel/carousel.dart">Component source \</></LinkButton>
+
+## Installation
+
+To install with [Mason CLI](https://pub.dev/packages/mason_cli), run the following:
+
+```zsh
+mason make flex_ui --component carousel
+```
+
+To install manually, copy and paste the component source files linked at the top of this page into your Flutter project.
+
+## Dependencies
+
+### External
+
+This component uses the following dependencies by default:
+1. [CarouserSlider](https://pub.dev/packages/carousel_slider) is the underlying component.
+2. [SmoothPageIndicator](https://pub.dev/packages/smooth_page_indicator) to display the "dots" representing each item.
+
+## Properties
+
+Name|Type|Description
+----|----|-----------
+`item`|`List<Widget>`|The items of the carousel
+`aspectRatio`|`double?`|Aspect Ratio of the carousel, default is: 16 / 9
+`enlargeCenterPage`|`bool?`|Whatever a zoom effect is applied on the item at the center (default: false)
+`pageSnapping`|`bool?`|When true, the items snap into position when ending the scroll gesture (default: true)
+`enableInfiniteScroll`|`bool?`|When true, the first items are rendered again after the last item, given an perception of infinite scroll (default: true)
+`autoPlay`|`bool?`|The carousel scrolls automatically, proceed with caution since it could be perceived as a bad UX on mobile (default: false)
+`dotsEnabled`|`bool?`|Enabled the dots below the carousel. Each dot represents an item. The dots are not tappable (default: false)
+`viewportFraction`|`double?`|Tells how much width takes a single item. Should be inferior to `1.0` to display the start of the next item (scrolling incentive). Can also be used to show multiple items (inferior to 0.5 shows 2 items). Default is `0.8`
+`padEnds`|`bool?`| When enabled, the current item is centered. When disabled, the carousel starts at the left of the viewport (default: true)
+
+
+## Examples
+
+### Default
+
+<Preview src="https://flex-ui-playground.web.app/carousel" minHeight="500px">
+ ```dart
+FlexCarousel(
+  items: [
+    FlexImage('https://loremflickr.com/640/380?lock=1'),
+    FlexImage('https://loremflickr.com/640/380?lock=2'),
+    FlexImage('https://loremflickr.com/640/380?lock=3'),
+    FlexImage('https://loremflickr.com/640/380?lock=4'),
+  ],
+  enlargeCenterPage: true,
+  aspectRatio: 1.8,
+  dotsEnabled: true,
+),
+```
+</Preview>
