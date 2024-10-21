@@ -5,49 +5,76 @@ sidebar:
   order: 2
 ---
 
-The following instructions describe how to build and run the Flex Storefront app.
+This guide will help you quickly set up and customize your mobile app project using the Flex Storefront accelerator.
 
 ## Prerequisites
 
-In order to install and run Flex Storefront, you will need a Flutter development environment, a running SAP Commerce Cloud instance, and a Firebase Project. Read the [Requirements](/getting-started/requirements) for full setup instructions.
+Before you begin, ensure you have the following installed:
 
-## Clone and Run the Repository
+- [Flutter](https://docs.flutter.dev/get-started/install) (latest stable version)
+- [Mason CLI](https://docs.brickhub.dev/installing/)
+- [Git](https://git-scm.com/downloads)
+- Your preferred IDE (we recommend VS Code or Android Studio)
 
-To get started, simply clone the repository
+Read the [requirements](/getting-started/requirements) section for full setup instructions.
+
+## Installation Steps
+
+### 1. Install Mason CLI
+
+If you haven't already installed Mason CLI, run:
 ```zsh
-git clone https://github.com/BASE1com/flex-storefront
+# Activate mason_cli
+dart pub global activate mason_cli
 ```
 
-Then go inside the flex-storefront folder and run the following command to install the dependencies:
+### 2. Create Your Project
 
-```bash
+```zsh
+# Create a new directory for your project
+mkdir my_storefront
+cd my_storefront
+
+# Initialize Mason
+mason init
+
+# Add the flex_storefront brick
+mason add flex_storefront --git-url git@github.com:flex-storefront/flex_starter.git --git-path brick
+```
+
+Running the above command will automatically install the `flex_storefront` brick in the current workspace and update the `mason.yaml`:
+
+```yaml
+bricks:
+  flex_storefront:
+    git:
+      url: 'git@github.com:flex-storefront/flex_starter.git'
+      path: 'brick'
+```
+
+Now, you can use the `make` command to generate the storefront code from the brick:
+
+```zsh
+# Generate your project
+mason make flex_storefront
+```
+
+If the brick was installed successfully, you should see the Flutter project structure files and folders. We can now install the app dependencies:
+
+```zsh
 flutter pub get
 ```
 
-Finally, make sure an iOS simulator, Android emulator, or a real device is available and run:
+Let's go ahead and run your Storefront App! You're now ready to start development 🎉
 
-```bash
-flutter run
-```
-
-You now have a running instance of Flex Storefront!
+![Flex Storefront](./flex_storefront_app-home.png)
 
 ## What's next?
 
 ### Set environment variables
 
-In order for Flex Storefront to connect to your running Hybris instance, you will need to provide certain environment variables.
+In order for Flex Storefront to connect to your backend Commerce instance, you will need to provide certain environment variables.
 
 ### Understanding the folder structure
 
-The Starter app is built using [flex_navigation](https://pub.dev/packages/flex_navigation), this is the first Flex package you are currently using. This package is listed in the `pubspec.yaml` file under the `dependencies` key:
-
-```yaml title="/pubspec.yaml"
-dependencies:
-  flex_navigation: ^1.0.0
-  flutter:
-    sdk: flutter
-```
-
-This package is used to implement the global navigation scheme, with smooth transitions, deep-linking, etc. Put yourself in the end user situation and navigate in this raw eCommerce application: PLP, PDP, Cart page, etc.
-
+Coming soon.
