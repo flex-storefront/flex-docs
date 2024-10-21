@@ -37,7 +37,7 @@ To set up a Flutter development environment, follow these steps:
    - Run `dart --version` to verify Dart installation.
 
 :::info
-We recommend a minimum of **Flutter 3.19.5** and **Dart 3.3.3**
+We recommend a minimum of **Flutter 3.24.3** and **Dart 3.5.3**
 :::
 
 ## Backend Requirements
