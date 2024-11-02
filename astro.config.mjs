@@ -34,7 +34,14 @@ export default defineConfig({
 				},
         {
           label: 'Storefront',
-          autogenerate: { directory: 'storefront' },
+          items: [
+            { label: 'Code Organization', link: '/storefront/10-code-organization' },
+            { label: 'App Config', autogenerate: { directory: '/storefront/app-config' } },
+            { label: 'Global Config', link: '/storefront/20-global-config' },
+            { label: 'Routing', link: '/storefront/30-routing' },
+            { label: 'State Management', link: '/storefront/40-state-management' },
+            { label: 'Analytics', link: '/storefront/50-analytics' },
+          ],
         },
         {
           label: 'Features',
