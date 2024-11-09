@@ -2,7 +2,7 @@
 title: Tech Stack
 description: The technical stack used within Flex.
 sidebar:
-  order: 3
+  order: 4
 ---
 
 This documentation outlines the technical stack used to build and power Flex mobile apps. It aims to provide an understanding of the technologies, tools, and best practices that power your app to ensure a consistent, maintainable, and accelerated experience for both developers and customers.
