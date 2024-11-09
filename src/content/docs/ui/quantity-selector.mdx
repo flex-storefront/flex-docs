@@ -1,0 +1,34 @@
+---
+title: Quantity Selector
+---
+import Preview from '../../../components/FlutterPreview.astro';
+import { LinkButton } from '@astrojs/starlight/components';
+
+Displays an Quantity Selector featuring minQuantity, maxQuantity and onChanged callbacks.
+
+<LinkButton href="https://github.com/flex-storefront/flex_ui/blob/main/lib/widgets/quantity_selector/quantity_selector.dart">Component source \</></LinkButton>
+
+## Installation
+
+To install with [Mason CLI](https://pub.dev/packages/mason_cli), run the following:
+
+```zsh
+mason make flex_ui --component flex_quantity_selector
+```
+
+To install manually, copy and paste the component source files linked at the top of this page into your Flutter project.
+
+## Examples
+
+### Default
+
+<Preview src="https://flex-ui-playground.web.app/quantity-selector">
+ ```dart
+FlexQuantitySelector(
+  quantity: quantity,
+  minQuantity: 1,
+  maxQuantity: 10,
+  onChange: (value) => setState(() => quantity = value),
+)
+```
+</Preview>
