@@ -1,6 +1,6 @@
 ---
 title: Setting up Firebase
-description: Learn how to set up Firebase project(s) for your Storefront.
+description: Learn how to set up Firebase within your Storefront.
 sidebar:
   order: 3
 ---
