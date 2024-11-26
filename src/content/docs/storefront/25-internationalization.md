@@ -7,65 +7,119 @@ sidebar:
 
 Flex Storefront uses [slang](https://pub.dev/packages/slang) for internationalization, providing type-safe translations across the application.
 
-## Structure
+## Slang: A Brief Overview
 
-The file structure of slang may be divided into two categories: (1) the translation resources and (2) the generated translation code. The translation resources house the translated text whereas the translation code is referenced within the rest of your code.
+Internationalization of Flex Storefront is achieved by [slang](https://pub.dev/packages/slang), a powerful, type-safe i18n solution which requires minimal setup.
 
-### 1. Translation Resources:
-
-Translations are organized in JSON files located in the `i18n` directory. Each language has its own file:
-- `strings.i18n.json` (Base language file - English, **default**)
-- `strings_fr.i18n.json` (French)
-- Add additional languages by creating new files following this pattern
-
-### 2. Generated Translation Code:
-
-Upon modifying an existing (or creating a new) language file, the file `strings.g.dart` must be regenerated from the translation resources. The command to regenerate the dart file is `dart run slang`, which should be ran from `/app`.
-
-The `strings.g.dart` file is **automatically generated** by slang and serves several important purposes:
-
-1. **Type Safety**
-   - Creates strongly typed classes from your JSON translation files
-   - Enables compile-time checking for missing translations
-   - Provides IDE autocomplete support
-
-2. **Translation Access**
-   - Generates the extension method `context.t` that provides access to all translations
-   - Creates nested classes that match your JSON structure
-
-> :warning: Never modify `strings.g.dart` directly as changes will be lost when the file is regenerated using `dart run slang`.
-
-## Usage
+### How it Works
 
 Text within the app is internationalized by replacing static text with references to the corresponding translations in `strings.g.dart`. These references use the `context.t` extension method to access the appropriate translation based on the current language setting.
 
-For example, the static text `"Change Language"` is replaced by `context.t.accountPage.settings.changeLanguage`
+> [!NOTE]
+> The "current language setting" is handled by a `cubit` state. The underlying files, `language_cubit.dart` and `language_state.dart`, may be found in `app/lib/account/cubit/`. This is discussed in greater detail later in this document.
 
-```dart
-import 'package:flex_starter/i18n/strings.g.dart';
-// other imports
+- **Accessing a Translation**
+  
+  Below, the static text `"Change Language"` is replaced by `context.t.accountPage.settings.changeLanguage`:
 
-// ... rest of code
-  @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => LanguageCubit(),
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(context.t.accountPage.settings.changeLanguage), // Reference to the translation code
+  ```dart
+  import 'package:flex_starter/i18n/strings.g.dart'; // 1. import strings.g.dart
+  ...
+
+  ...
+    @override
+    Widget build(BuildContext context) {
+      return BlocProvider(
+        create: (_) => LanguageCubit(),
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text(context.t.accountPage.settings.changeLanguage), // 2. refactor a static string with the corresponding key
+          ),
+          body: const ChangeLanguageView(),
         ),
-        body: const ChangeLanguageView(),
-      ),
-    );
-  }
-// ... rest of code
-```
+      );
+    }
+  ...
+  ```
 
+- **Changing Languages**
+
+  The switching of languages is handled by the `cubit` `LanguageCubit` located `app/lib/account/cubit/language_cubit.dart`. This `cubit`, when the app is first initialized, is set to the system language of the device hosting the app. The state of the `cubit` may then be changed by navigating to `My Account` > `Change Language`, which currently provides the language options of English and French.
+
+
+### File Structure
+slang lives within `app/lib/i18n/`. This directory contains multiple JSON files (*the translation resources*) and a single dart file (*the translation code*). 
+
+1. **Translation Resources**
+
+    Translations are organized in JSON files located in the `i18n` directory. Each language has its own file:
+    - `strings.i18n.json` (Base language file - English, **default**)
+    - `strings_fr.i18n.json` (French)
+
+    The translation resources contain the mapping of text requiring translation. **The keys - and structure - of each file must be identical. Only the corresponding values change to reflect the respective translation**. For example, the `common` key within the respective files contains the following:
+
+    *`strings.i18n.json`*
+    ```json 
+      "common": {
+        "actions": {
+          "retry": "Retry",
+          "apply": "Apply"
+        }
+      }
+    ```
+    *`strings_fr.i18n.json`*
+    ```json 
+      "common": {
+        "actions": {
+          "retry": "Réessayer",
+          "apply": "Appliquer"
+        }
+      }
+    ```
+
+2. **Translation Code**
+
+    The content within the translation resources is then used when `strings.g.dart` is automatically regenerated. Once a new translation JSON is added or an existing one is modified, the file must be regenerated. `strings.g.dart` may be regenerated by navigating to `/app` within a terminal and running `dart run slang`.
+
+
+    The file serves several important purposes:
+
+   - **Type Safety**
+     - Creates strongly typed classes from your JSON translation files
+     - Enables compile-time checking for missing translations
+     - Provides IDE autocomplete support
+
+   - **Translation Access**
+     - Generates the extension method `context.t` that provides access to all translations
+     - Creates nested classes that match your JSON structure
+
+    > [!WARNING]
+    > Never modify `strings.g.dart` directly as changes will be lost when the file is regenerated!
+
+    Once `strings.g.dart` is imported, any instance of static text may be replaced with the respective key. **A key will follow the same tree structure as what is represented within the JSON**. For example, the example above replaces the text `"Change Language"` with `context.t.accountPage.settings.changeLanguage`, which represents the key `changeLanguage` and therefore value `"Change Language"`.
+
+    ```json
+    "accountPage": {
+      "settings": {
+        "sectionTitle": "Settings",
+        "communication": "Communication",
+        "theme": "Theme",
+        "personalData": "Personal Data",
+        "myStore": "My Store",
+        "changeLanguage": "Change Language"
+        },
+      }
+    ```
+
+
+
+
+
+## slang Examples
 ### Basic Translation
 To access translations in your widgets:
 
 ```dart
-// Access a simple translation
 Text(context.t.common.actions.retry)
 ```
 
@@ -77,7 +131,13 @@ Text(context.t.shopPage.productListPage.widgets.filterAndSort.filterAndSort)
 ```
 
 ### Working with Enums
-When translating enum values (like for sort options or filters), use a helper function:
+When translating enum values (like for sort options or filters), use a helper function. Helper functions (like the `_getSortByText` example below) are necessary when:
+
+- Translating enum values
+- Mapping dynamic values to translations
+- Handling complex translation logic
+
+This provides type safety and centralized translation management for these cases.
 
 ```dart
 String _getSortByText(SortBy sortBy, BuildContext context) {
@@ -89,41 +149,24 @@ String _getSortByText(SortBy sortBy, BuildContext context) {
 }
 ```
 
-## Adding New Translations
+## Troubleshooting
+### Missing Translations
+If a translation is missing:
 
-1. Define your translations in the base language file (e.g., `strings_en.i18n.json`):
-```json
-{
-  "common": {
-    "actions": {
-      "retry": "Retry",
-      "apply": "Apply"
-    }
-  }
-}
-```
+- The IDE will show a compile-time error
+- Add the missing key to all language files
+- Regenerate `strings.g.dart`
 
-2. Add corresponding translations in other language files (e.g., `strings_fr.i18n.json`):
-```json
-{
-  "common": {
-    "actions": {
-      "retry": "Réessayer",
-      "apply": "Appliquer"
-    }
-  }
-}
-```
+### Common Issues
+- **`dart run slang` fails**: 
+  - Ensure all JSON files have identical structure
+  - Check for valid JSON syntax (missing commas, quotes, etc.)
 
-## Type Safety
+- **Translation not updating**: 
+  - Make sure to regenerate `strings.g.dart` after changes
+  - Verify the JSON key path matches your `context.t` reference
 
-Slang generates type-safe code, ensuring:
-- All translations are accessed through typed properties
-- Missing translations are caught at compile-time
-- IDE autocomplete support for translation keys
-
-## Key Benefits
-- Type-safe translations
-- Compile-time checking for missing translations
-- Easy maintenance with JSON-based translation files
-- IDE support for autocompletion
+- **Runtime language not changing**: 
+  - Verify `LanguageCubit` state is being updated correctly
+  - Ensure you're using the correct BuildContext that has access to the BlocProvider
+  - Common mistake: Not wrapping your widget with BlocProvider or using a context that doesn't have access to the BlocProvider
