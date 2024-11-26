@@ -93,9 +93,6 @@ slang lives within `app/lib/i18n/`. This directory contains multiple JSON files 
      - Generates the extension method `context.t` that provides access to all translations
      - Creates nested classes that match your JSON structure
 
-    > [!WARNING]
-    > Never modify `strings.g.dart` directly as changes will be lost when the file is regenerated!
-
     Once `strings.g.dart` is imported, any instance of static text may be replaced with the respective key. **A key will follow the same tree structure as what is represented within the JSON**. For example, the example above replaces the text `"Change Language"` with `context.t.accountPage.settings.changeLanguage`, which represents the key `changeLanguage` and therefore value `"Change Language"`.
 
     ```json
@@ -111,9 +108,8 @@ slang lives within `app/lib/i18n/`. This directory contains multiple JSON files 
       }
     ```
 
-
-
-
+> [!WARNING]
+> Never modify `strings.g.dart` directly as changes will be lost when the file is regenerated!
 
 ## slang Examples
 ### Basic Translation
