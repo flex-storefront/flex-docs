@@ -54,6 +54,12 @@ Other scaling considerations such as a Content Delivery Network (CDN) can also b
 
 Flex Storefront is currently powering apps with over 10M monthly active users.
 
+### Does Flex Storefront support different languages?
+
+Yes! Flex Storefront supports multiple languages using the [slang](https://pub.dev/packages/slang) package for translations. 
+
+For more information about internationalization and how slang is implemented in the app, see our documentation [here](../storefront/25-internationalization.md).
+
 ### How do I get support when I run into issues?
 
 If you run into any issues, you can open a ticket in our [GitHub repository](https://github.com/BASE1com/flex-storefront).
