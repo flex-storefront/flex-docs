@@ -58,7 +58,7 @@ Flex Storefront is currently powering apps with over 10M monthly active users.
 
 Yes! Flex Storefront supports multiple languages using the [slang](https://pub.dev/packages/slang) package for translations. 
 
-For more information about internationalization and how slang is implemented in the app, see our documentation [here](). <!-- TODO: ADD LINK -->
+For more information about internationalization and how slang is implemented in the app, see our documentation [here](../storefront/60-internationalization.md).
 
 ### How do I get support when I run into issues?
 
