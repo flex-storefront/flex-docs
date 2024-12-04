@@ -49,7 +49,7 @@ bricks:
   flex_storefront:
     git:
       url: 'git@github.com:flex-storefront/flex_starter.git'
-      path: 'brick'
+      path: 'bricks/storefront/'
 ```
 
 Now, you can use the `make` command to generate the storefront code from the brick:
