@@ -39,7 +39,7 @@ cd my_storefront
 mason init
 
 # Add the flex_storefront brick
-mason add flex_storefront --git-url git@github.com:flex-storefront/flex_starter.git --git-path brick
+mason add flex_storefront --git-url git@github.com:flex-storefront/flex_starter.git --git-path bricks/storefront/
 ```
 
 Running the above command will automatically install the `flex_storefront` brick in the current workspace and update the `mason.yaml`:
