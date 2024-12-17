@@ -5,5 +5,77 @@ sidebar:
   order: 59
 ---
 
-Google, VTEX, etc.
+import { Aside } from "@astrojs/starlight/components";
 
+
+Event comparisons for various service providers. The following are currently supported:
+
+**Google**
+- [Recommended Google Events via Google Analytics](https://support.google.com/analytics/answer/9267735?hl=en)
+- [Firebase SDK for Google Analytics](https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.Event)
+
+**VTEX**
+- [VTEX Event Details](https://github.com/vtex-apps/adobe-launch-pixel?tab=readme-ov-file#native-vtex-events)
+
+## Event Tracking Comparisons
+
+<Aside type="note" title="TODO">
+  Remove comparison list from README in Analytics Repository. Maintain source of truth in these docs.
+</Aside>
+
+### Cart Events
+| Event | VTEX | Google |IAnalyticsRepository |
+|-------|----------------|-------------------|-------------------|
+| Add to Cart | addToCart | [add_to_cart](https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.Event#ADD_TO_CART()) | shoppingCartItemAdded |
+| Remove from Cart | removeFromCart | [remove_from_cart](https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.Event#REMOVE_FROM_CART()) | shoppingCartItemRemoved |
+| View Cart | | [view_cart](https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.Event#VIEW_CART()) | shoppingCartViewed |
+| Cart Changed | cartChanged | | shoppingCartChanged |
+| Cart ID | cartId | | shoppingCartID |
+
+### Checkout Events
+| Event | VTEX | Google | IAnalyticsRepository |
+|-------|----------------|-------------------|-------------------|
+| Begin Checkout | | [begin_checkout](https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.Event#BEGIN_CHECKOUT()) | checkoutBegin |
+| Payment Info Added | | [add_payment_info](https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.Event#ADD_PAYMENT_INFO()) | paymentInfoAddedCheckout |
+| Shipping Info Added | | [add_shipping_info](https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.Event#ADD_SHIPPING_INFO()) | shippingInfoAddedCheckout |
+| Order Placed/Purchase | orderPlaced | [purchase](https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.Event#PURCHASE()) | purchaseCompleted |
+| Refund | | [refund](https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.Event#REFUND()) | refundReceived |
+
+### Product Events
+| Event | VTEX | Google | IAnalyticsRepository |
+|-------|----------------|-------------------|-------------------|
+| Product View | productView | [view_item](https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.Event#VIEW_ITEM()) | itemViewed |
+| Product Click | productClick | | itemClicked |
+| Product Impression | productImpression | | itemImpression |
+| View Item List | | [view_item_list](https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.Event#VIEW_ITEM_LIST()) | itemListViewed |
+| Sort Item List | | | itemListSorted |
+| Filter Item List | | | itemListFiltered |
+| Select Item from List | | [select_item](https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.Event#SELECT_ITEM()) | itemListItemSelected |
+| Add to Wishlist | | [add_to_wishlist](https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.Event#ADD_TO_WISHLIST()) | wishlistItemAddition |
+
+### Promotion Events
+| Event | VTEX | Google | IAnalyticsRepository |
+|-------|----------------|-------------------|-------------------|
+| Promotion View | promoView | [view_promotion](https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.Event#VIEW_PROMOTION()) | promotionViewed |
+| Promotion Click | promoClick | [select_promotion](https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.Event#SELECT_PROMOTION()) | promotionSelected |
+| Select Content | | [select_content](https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.Event#SELECT_CONTENT()) | contentSelected |
+
+### Page View Events
+| Event | VTEX | Google | IAnalyticsRepository |
+|-------|----------------|-------------------|-------------------|
+| Page View | pageView | | pageViewed |
+| Home Page Info | homePageInfo | | homePageInfo |
+| Search Page Info | searchPageInfo | | searchPageInfo |
+| Search Initialized | | | searchInitialized |
+| Search Query Changed |  | | searchQueryChanged |
+| Search Query Submitted | | [search](https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.Event#SEARCH()) | searchQuerySubmitted |
+
+### User Events
+| Event | VTEX | Google | IAnalyticsRepository |
+|-------|----------------|-------------------|-------------------|
+| Login | | [login](https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.Event#LOGIN()) | login |
+| Sign Up | | [sign_up](https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.Event#SIGN_UP()) | newUserCreated |
+| Content Shared | | [share](https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.Event#SHARE()) | contentShared |
+| Language Changed | userData | | changeLanguage |
+| Theme Changed | userData | | changeTheme |
+| User Data | userData | | userData |

@@ -1,13 +1,13 @@
 ---
-title: Google Events
+title: Google Analytics
 description: Google-specific events.
 sidebar:
   order: 52
 ---
 
-Events natively supported by Google Analytics.
+Events natively supported by Google Analytics. Recommended events may be found [here](https://support.google.com/analytics/answer/9267735?hl=en). Visit the official Firebase SDK [documentation](https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.Event) for more information.
 
-### `ViewItemEvent`
+##### `VIEW_ITEM`
 
 This event is fired whenever the user opens the Product Detail Page. It can be used to identify the most popular products of your catalog.
 
@@ -17,9 +17,9 @@ This event is fired whenever the user opens the Product Detail Page. It can be u
 | currency | Currency of the price                                 |
 | items    | Only one, product information (identifier, name, ...) |
 
-Google Analytics reference: [Link](https://developers.google.com/analytics/devguides/collection/ga4/reference/events?client_type=gtag#view_item)
+Google Analytics reference: [Link](https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.Event#VIEW_ITEM())
 
-### `SelectContentEvent`
+##### `SELECT_CONTENT`
 
 This event is fired for different kinds of entity in the app (example: category).
 
@@ -28,9 +28,9 @@ This event is fired for different kinds of entity in the app (example: category)
 | contentType | Type of the entity (example: "category")                             |
 | itemId      | Identifier of the entity (example: the category code for a category) |
 
-Google Analytics reference: [Link](https://developers.google.com/analytics/devguides/collection/ga4/reference/events?client_type=gtag#select_content)
+Google Analytics reference: [Link](https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.Event#SELECT_CONTENT())
 
-### `ViewCartEvent`
+##### `VIEW_CART`
 
 This event is fired whenever the user opens the Cart Page.
 
@@ -40,9 +40,9 @@ This event is fired whenever the user opens the Cart Page.
 | currency | Currency of the value above                                                          |
 | items    | For each lines in the cart: product information (identifier, name, ...) and quantity |
 
-Google Analytics reference: [Link](https://developers.google.com/analytics/devguides/collection/ga4/reference/events?client_type=gtag#view_item)
+Google Analytics reference: [Link](https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.Event#VIEW_CART())
 
-### `AddToCartEvent`
+##### `ADD_TO_CART`
 
 This event is fired when the user adds a new product to the cart, note that quantity adjustments (for a product already belonging to the cart) aren't tracked.
 
@@ -52,9 +52,9 @@ This event is fired when the user adds a new product to the cart, note that quan
 | currency | Currency of the price                                                    |
 | items    | Only one: product information (identifier, name, ...) and quantity added |
 
-Google Analytics reference: [Link](https://developers.google.com/analytics/devguides/collection/ga4/reference/events?client_type=gtag#add_to_cart)
+Google Analytics reference: [Link](https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.Event#ADD_TO_CART())
 
-### `RemoveFromCartEvent`
+##### `REMOVE_FROM_CART`
 
 This event is fired when the user removes a product from the cart, regardless of the quantity (quantity adjustments for products in cart aren't tracked).
 
@@ -64,4 +64,4 @@ This event is fired when the user removes a product from the cart, regardless of
 | currency | Currency of the price                                                                                        |
 | items    | Only one: product information (identifier, name, ...) and the quantity at the moment the product was removed |
 
-Google Analytics reference: [Link](https://developers.google.com/analytics/devguides/collection/ga4/reference/events?client_type=gtag#remove_from_cart)
+Google Analytics reference: [Link](https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.Event#REMOVE_FROM_CART())
