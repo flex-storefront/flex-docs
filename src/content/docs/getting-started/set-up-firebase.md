@@ -48,8 +48,13 @@ flutter pub get
 
 1. Run the FlutterFire configure command:
 ```bash
-flutterfire configure
+flutterfire configure -p flex-storefront-dev -i com.base1.flex-storefront.dev -a com.base1.flex_storefront.dev --out lib/firebase_options_dev.dart 
 ```
+
+   - `-p` specifies the project
+   - `-i` specifies the IOS name
+   - `-a` specifies the Android name
+   - `--out` species the location for the `firebase_options` file
 
 2. Select your created Firebase project
 3. This will automatically:
