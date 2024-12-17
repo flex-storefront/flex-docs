@@ -40,7 +40,7 @@ export default defineConfig({
             { label: 'Global Config', link: '/storefront/20-global-config' },
             { label: 'Routing', link: '/storefront/30-routing' },
             { label: 'State Management', link: '/storefront/40-state-management' },
-            { label: 'Analytics', link: '/storefront/50-analytics' },
+            { label: 'Analytics', autogenerate: { directory: '/storefront/analytics' } },
           ],
         },
         {
