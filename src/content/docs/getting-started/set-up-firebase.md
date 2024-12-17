@@ -56,7 +56,7 @@ flutterfire configure -p flex-storefront-dev -i com.base1.flex-storefront.dev -a
    - `-a` The package name of your Android app, e.g. "com.example.app". 
    - `--out` Specifies the path & file name for the generated file.
  
-More information on flags may be found [here](https://firebase.flutter.dev/docs/cli/#commands).
+      More information on flags may be found [here](https://firebase.flutter.dev/docs/cli/#commands).
 
 2. Select your created Firebase project
 3. This will automatically:
