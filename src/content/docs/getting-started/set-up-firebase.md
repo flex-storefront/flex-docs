@@ -46,7 +46,7 @@ flutter pub get
 
 ### 4. Initialize Firebase in Your Project
 
-1. Run the FlutterFire configure command:
+1. Run the FlutterFire configure command. Be sure to specify the flavour (dev/stg/prod):
 ```bash
 flutterfire configure -p flex-storefront-dev -i com.base1.flex-storefront.dev -a com.base1.flex_storefront.dev --out lib/firebase_options_dev.dart 
 ```
