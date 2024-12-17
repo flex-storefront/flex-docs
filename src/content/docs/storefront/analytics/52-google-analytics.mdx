@@ -1,0 +1,88 @@
+---
+title: Google Analytics
+description: Google-specific events.
+sidebar:
+  order: 52
+tableOfContents:
+  minHeadingLevel: 2
+  maxHeadingLevel: 5
+---
+
+import { FileTree } from "@astrojs/starlight/components";
+
+Events natively supported by Google Analytics. Recommended events may be found [here](https://support.google.com/analytics/answer/9267735?hl=en). Visit the official Firebase SDK [documentation](https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.Event) for more information.
+
+## Cart Events 
+---
+
+##### `ADD_TO_CART`
+
+This event is fired when the user adds a new product to the cart, note that quantity adjustments (for a product already belonging to the cart) aren't tracked.
+
+| Name     | Description                                                              |
+| -------- | ------------------------------------------------------------------------ |
+| value    | Price of the product added to the cart                                   |
+| currency | Currency of the price                                                    |
+| items    | Only one: product information (identifier, name, ...) and quantity added |
+
+Google Analytics reference: [Link](https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.Event#ADD_TO_CART())
+
+##### `REMOVE_FROM_CART`
+
+This event is fired when the user removes a product from the cart, regardless of the quantity (quantity adjustments for products in cart aren't tracked).
+
+| Name     | Description                                                                                                  |
+| -------- | ------------------------------------------------------------------------------------------------------------ |
+| value    | Price of the product added to the cart                                                                       |
+| currency | Currency of the price                                                                                        |
+| items    | Only one: product information (identifier, name, ...) and the quantity at the moment the product was removed |
+
+Google Analytics reference: [Link](https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.Event#REMOVE_FROM_CART())
+
+
+##### `VIEW_CART`
+
+This event is fired whenever the user opens the Cart Page.
+
+| Name     | Description                                                                          |
+| -------- | ------------------------------------------------------------------------------------ |
+| value    | Total value of the Cart                                                              |
+| currency | Currency of the value above                                                          |
+| items    | For each lines in the cart: product information (identifier, name, ...) and quantity |
+
+Google Analytics reference: [Link](https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.Event#VIEW_CART())
+
+## Product Events 
+---
+
+##### `VIEW_ITEM`
+
+This event is fired whenever the user opens the Product Detail Page. It can be used to identify the most popular products of your catalog.
+
+| Name     | Description                                           |
+| -------- | ----------------------------------------------------- |
+| value    | Price of the product                                  |
+| currency | Currency of the price                                 |
+| items    | Only one, product information (identifier, name, ...) |
+
+Google Analytics reference: [Link](https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.Event#VIEW_ITEM())
+
+
+## Promotion Events 
+---
+
+##### `SELECT_CONTENT`
+
+This event is fired for different kinds of entity in the app (example: category).
+
+| Name        | Description                                                          |
+| ----------- | -------------------------------------------------------------------- |
+| contentType | Type of the entity (example: "category")                             |
+| itemId      | Identifier of the entity (example: the category code for a category) |
+
+Google Analytics reference: [Link](https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.Event#SELECT_CONTENT())
+
+
+
+
+

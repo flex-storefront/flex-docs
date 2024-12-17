@@ -46,10 +46,17 @@ flutter pub get
 
 ### 4. Initialize Firebase in Your Project
 
-1. Run the FlutterFire configure command:
+1. Run the FlutterFire configure command. Be sure to specify the flavour (dev/stg/prod):
 ```bash
-flutterfire configure
+flutterfire configure -p flex-storefront-dev -i com.base1.flex-storefront.dev -a com.base1.flex_storefront.dev --out lib/firebase_options_dev.dart 
 ```
+
+   - `-p` Sets the Firebase Project ID to use. 
+   - `-i` The bundle identifier of your iOS app, e.g. "com.example.app".
+   - `-a` The package name of your Android app, e.g. "com.example.app". 
+   - `--out` Specifies the path & file name for the generated file.
+ 
+      More information on flags may be found [here](https://firebase.flutter.dev/docs/cli/#commands).
 
 2. Select your created Firebase project
 3. This will automatically:

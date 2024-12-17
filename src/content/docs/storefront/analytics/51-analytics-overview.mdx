@@ -1,0 +1,236 @@
+---
+title: Overview
+description: Learn how Flex Storefront handles analytics.
+sidebar:
+  order: 51
+tableOfContents:
+  minHeadingLevel: 2
+  maxHeadingLevel: 5
+---
+
+import { FileTree } from "@astrojs/starlight/components";
+import { Aside } from "@astrojs/starlight/components";
+
+Flex Storefront supports analytics events to gain valuable insights into user behavior and app performance.
+
+By default, [Google Analytics 4](https://support.google.com/analytics/answer/10089681?hl=en) is used to measure features and behaviour and generate useful reports with the provided data. The following
+events are triggered automatically when using the Storefront, and can be turned off or customized inside their
+[bloc, cubit or repository](../../40-state-management).
+
+## Capturing Events within FLEX
+
+FLEX utilizes the [Repository Design Pattern](https://www.geeksforgeeks.org/repository-design-pattern/) to impliment event capturing, amongst other things. Repositories utilized by FLEX are located within `app/packages/`, and the repository used to capture events is contained within the directory `analytics_repository/` therein. More information on FLEX repositories may be found [here]().
+
+<Aside type="note" title="TODO">
+  Create a page dedicated to discussing the repository pattern with respect to
+  FLEX. Possibly within a *Concepts* direcory.
+</Aside>
+
+### IAnalyticsRepository
+
+<FileTree>
+- packages/
+  - analytics_repository/
+    - .dart_tool/
+    - lib/
+      - src/
+        - repositories/
+          - **analytics_repository.dart** supertype
+          - google_analytics_repository.dart implementation of
+          - logger_analytics_repository.dart implementation of
+        - analytics_repository.dart
+    - .gitignore
+    - CHANGELOG.md
+    - pubspec.lock
+    - pubspec.yaml
+    - README.md
+</FileTree>
+
+At its core, `IAnalyticsRepository` is an [interface](https://dart.dev/language/extension-types#implements) that defines the structure that any service-specific event class should follow. It contains multiple methods, each representing a specific event. For example, the `checkoutBegin()` method represents when a user starts the checkout process in the FLEX app. For more information about pre-built events, see the [Supported Events](../52-supported-events) page.
+
+Being a `supertype`, `IAnalyticsRepository` is service-agnostic and merely serves as a blueprint for future implementations. Currently, there are two implementations of `IAnalyticsRepository`:
+
+- **GoogleAnalyticsRepository**: Representing [Google Analytics](https://support.google.com/analytics/answer/9267735?hl=en) and, more specifically, the [Firebase SDK](https://firebase.google.com/docs/analytics).
+- **LoggerAnalyticsRepository**: Representing local event capturing.
+
+## Event List
+
+Below is a non-exhaustive list of events.
+
+<Aside type="caution">
+  Supported events will always be evolving; for the most up-to-date list of
+  supported events, please check `app/packages/analytics_repository/README.md`.
+</Aside>
+
+### Cart Events 
+---
+
+##### `shoppingCartItemAdded`
+| [Google](../52-google-analytics/#add_to_cart) |
+
+
+Tracks when a user adds an item to their shopping cart, helping analyze conversion funnel and product interest.
+
+##### `shoppingCartItemRemoved`
+| [Google](../52-google-analytics/#remove_from_cart) |
+
+
+Records the removal of items from the shopping cart, useful for understanding cart abandonment patterns.
+
+##### `shoppingCartViewed`
+| [Google](../52-google-analytics/#view_cart) |
+
+Tracks when users view their shopping cart, helping analyze shopping behavior and cart interaction patterns.
+
+##### `shoppingCartChanged`
+
+Monitors modifications to cart contents, useful for understanding user decision-making during shopping.
+
+##### `shoppingCartID`
+
+Generates and tracks unique cart identifiers, enabling cart persistence and analysis across sessions.
+
+### Checkout Events
+---
+
+##### `checkoutBegin`
+
+Fires when a user initiates the checkout process, marking the start of the purchase conversion funnel.
+
+##### `paymentInfoAddedCheckout`
+
+Tracks when payment information is successfully added during checkout, helping monitor checkout flow completion rates.
+
+##### `shippingInfoAddedCheckout`
+
+Records when shipping information is added during checkout, useful for analyzing checkout progress and abandonment points.
+
+##### `purchaseCompleted`
+
+Captures successful purchase completions, essential for tracking conversion rates and revenue analysis.
+
+##### `refundReceived`
+
+Tracks refund events, helping monitor customer satisfaction and return patterns.
+
+### Product Events
+---
+
+##### `itemViewed`
+| [Google](../52-google-analytics/#view_item) | 
+
+Captures when a user views a specific product's details, providing insights into product interest levels.
+
+##### `itemClicked`
+
+Records when users click on product items, helping track engagement with product listings.
+
+##### `itemImpression`
+
+Tracks when products are displayed to users, useful for analyzing product visibility and exposure.
+
+##### `itemListViewed`
+
+Records when users view product lists or categories, helping understand browsing patterns.
+
+##### `itemListSorted`
+
+Tracks when users sort product lists, providing insights into user preferences for product organization.
+
+##### `itemListFiltered`
+
+Monitors when users apply filters to product lists, helping understand product discovery patterns.
+
+##### `itemListItemSelected`
+
+Captures when users select specific items from a list, tracking product interest in list context.
+
+##### `wishlistItemAddition`
+
+Records when users add items to their wishlist, helping track product interest and potential future purchases.
+
+### Promotion Events
+---
+
+##### `promotionViewed`
+
+Tracks when users view promotional content, measuring promotion visibility and reach.
+
+##### `promotionSelected`
+
+Records when users interact with promotional content, helping measure promotion effectiveness.
+
+##### `contentSelected`
+| [Google](../52-google-analytics/#selectcontentevent) |
+
+Tracks user interaction with various content types, providing insights into content engagement.
+
+### Page View Events
+---
+
+##### `pageViewed`
+
+Captures general page view events across the application, tracking user navigation patterns.
+
+##### `homePageInfo`
+
+Records user interactions and views of the home page, measuring landing page effectiveness.
+
+##### `searchPageInfo`
+
+Tracks user behavior on search results pages, helping optimize search functionality.
+
+##### `searchInitialized`
+
+Records when users start a search session, tracking search feature usage.
+
+##### `searchQueryChanged`
+
+Monitors changes in search queries, helping understand user search refinement behavior.
+
+##### `searchQuerySubmitted`
+
+Tracks final search queries submitted by users, providing insights into user search intent.
+
+### User Events
+---
+
+##### `login`
+
+Records user authentication events, tracking user session patterns.
+
+##### `newUserCreated`
+
+Tracks new user registration events, measuring user acquisition.
+
+##### `contentShared`
+
+Records when users share content, tracking social engagement and virality.
+
+##### `changeLanguage`
+
+Monitors language preference changes, helping track user localization needs.
+
+**Parameters**:
+
+| Name        | Description                                                   |
+| ----------- | ------------------------------------------------------------- |
+| newLanguage | The new language state triggered by the `LanguageCubit` event |
+
+##### `changeTheme`
+
+Records theme preference changes, tracking user customization patterns.
+
+**Parameters**:
+
+| Name      | Description                           |
+| --------- | ------------------------------------- |
+| themeName | The new instance of `UserThemeChange` |
+
+##### `userData`
+
+Captures user profile and preference data, helping understand user demographics and preferences.
+
+##### `trackEvent`
+
+Generic event tracking method for custom events not covered by specific tracking methods.
