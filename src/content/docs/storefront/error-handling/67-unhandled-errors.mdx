@@ -1,0 +1,47 @@
+---
+title: Unhandled Errors
+description: Learn how Flex Storefront handles analytics.
+sidebar:
+  order: 67
+tableOfContents:
+  minHeadingLevel: 2
+  maxHeadingLevel: 5
+---
+
+Flex Storefront implements a robust system for catching and reporting unhandled errors using Firebase Crashlytics. This ensures that any unexpected errors are properly logged and can be analyzed for debugging and improvement.
+
+## Error Handlers
+
+### Flutter Errors
+
+Flutter-specific errors are caught using `FlutterError.onError`. This handles errors that occur within the Flutter framework.
+
+```dart
+FlutterError.onError = (details) {
+  log(details.exceptionAsString(), stackTrace: details.stack);
+  FirebaseCrashlytics.instance.recordFlutterFatalError(details);
+};
+```
+
+**When is this triggered?**
+- Widget build errors
+- Layout errors
+- Animation errors
+- Other Flutter-specific exceptions
+
+### Platform Dispatcher Errors
+
+Async errors that aren't caught by Flutter's error handler are captured using `PlatformDispatcher.instance.onError`.
+
+```dart
+PlatformDispatcher.instance.onError = (error, stack) {
+  FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+  return true;
+};
+```
+
+**When is this triggered?**
+- Unhandled async errors
+- Platform channel errors
+- Background task errors
+- Isolate errors

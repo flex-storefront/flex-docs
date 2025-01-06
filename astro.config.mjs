@@ -41,7 +41,7 @@ export default defineConfig({
             { label: 'Routing', link: '/storefront/30-routing' },
             { label: 'State Management', link: '/storefront/40-state-management' },
             { label: 'Analytics', autogenerate: { directory: '/storefront/analytics' } },
-            { label: 'Error Handling', link: '/storefront/60-error-handling' },
+            { label: 'Error Handling',autogenerate: { directory: '/storefront/error-handling' } },
 
           ],
         },

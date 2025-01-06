@@ -1,0 +1,104 @@
+---
+title: FlexError
+description: Learn how Flex Storefront handles errors.
+sidebar:
+  order: 63
+tableOfContents:
+  minHeadingLevel: 2
+  maxHeadingLevel: 5
+---
+
+Flex Storefront implements a robust error handling system using a sealed class hierarchy. The `FlexError` class, located in `lib/core/error/error.dart`, serves as the base for all error types in the application, ensuring type safety and enabling exhaustive error handling across the platform.
+
+## Error Types
+
+### FlexError
+The base sealed class that all specific error types must extend. It enforces implementation of a `message` getter for consistent error messaging across the application.
+
+### NetworkError
+Handles all network-related failures when interacting with commerce platforms. This includes HTTP errors, connection failures, and API-related issues.
+
+**Properties:**
+- `message`: Description of the network error
+- `statusCode`: Optional HTTP status code associated with the error
+
+**Common Usage:**
+- Failed API calls to SAP Commerce Cloud
+- VTEX API connection issues
+- Invalid HTTP responses
+- Network timeout scenarios
+
+### ParsingError
+Represents failures during data parsing and transformation operations.
+
+**Common Usage:**
+- JSON parsing failures
+- Invalid response formats from commerce platforms
+- Data type mismatches
+- Schema validation errors
+
+### AuthenticationError
+Handles authentication and authorization failures in B2B/B2C scenarios.
+
+**Common Usage:**
+- Invalid credentials
+- Expired authentication tokens
+- Insufficient permissions
+- Session timeout scenarios
+- B2B organization access restrictions
+
+### TimeoutError
+Represents timeout scenarios across different operations.
+
+**Common Usage:**
+- API call timeouts
+- Long-running operation thresholds
+- Connection timeout with commerce platforms
+- Background task timeout scenarios
+
+### UnknownError
+Serves as a fallback for unexpected error scenarios not covered by other error types.
+
+**Common Usage:**
+- Unhandled exceptions
+- System-level errors
+- Unexpected platform behavior
+- Third-party integration failures
+
+## Best Practices
+
+1. **Error Handling**
+   - Always handle errors exhaustively using pattern matching
+   - Provide meaningful error messages that aid in troubleshooting
+   - Log errors appropriately based on severity
+
+2. **Error Propagation**
+   - Consider error boundaries when propagating errors up the widget tree
+   - Transform platform-specific errors into appropriate FlexError types
+   - Maintain error context through the call stack
+
+3. **User Experience**
+   - Present user-friendly error messages
+   - Implement appropriate retry mechanisms for transient errors
+   - Provide clear recovery paths for authentication errors
+
+## Example Usage
+
+```dart
+try {
+  // Commerce platform operation
+} catch (e, stackTrace) {
+  final error = switch (e) {
+    // Handle network-specific errods
+    NetworkError() => NetworkError(
+        message:
+            "A NetworkError has occurred during fetching getProducts.\n$e",
+        statusCode: e.statusCode,
+      ),
+    // Handle all other errors
+    _ => UnknownError(
+        "An unknown error occurred during fetching getProducts.\n$e",
+      )
+  };
+}
+```

@@ -1,0 +1,109 @@
+---
+title: Displaying Errors
+description: Displaying errors to the user.
+sidebar:
+  order: 65
+tableOfContents:
+  minHeadingLevel: 2
+  maxHeadingLevel: 5
+---
+
+Following the Flutter mantra, error messages are displayed to the user in the form of widgets. These widgets, located under `shared/widgets/error_handling/`, represent the various ways an error may be displayed to the user.
+
+## Widget Types
+
+### Full Page Errors
+`full_page_error.dart`
+
+Full page errors are designed to handle catastrophic failures that prevent the main content from being displayed. This widget provides a user-friendly error message with an optional retry mechanism.
+
+#### Usage
+
+```dart
+FullPageError(
+  error: NetworkError(message: "Connection failed"),
+  onRetry: () => fetchData(), // Optional retry callback
+)
+```
+
+#### Features
+
+- **Error Type Handling**: Automatically maps different `FlexError` types to appropriate localized messages
+- **Retry Mechanism**: Optional retry functionality with a button when `onRetry` callback is provided
+- **Internationalization**: Uses the app's localization system (`context.t`) for error messages
+- **Flexible Layout**: Centers content with proper spacing using `FlexSizes`
+
+#### Props
+
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| error | FlexError | Yes | The error to be displayed |
+| onRetry | VoidCallback? | No | Optional callback for retry functionality |
+
+#### Error Message Mapping
+
+The widget automatically maps different error types to appropriate localized messages:
+
+```dart
+final errorMessage = switch (error) {
+  NetworkError _ => context.t.common.errors.networkError,
+  UnknownError _ => context.t.common.errors.unknownError,
+  _ => context.t.common.errors.anErrorOccured,
+};
+```
+
+#### Styling
+
+The widget follows the Flex UI design system:
+- Uses `FlexSizes` for consistent spacing
+- Implements standard button styling with icon
+- Centers content for optimal visibility
+
+#### Best Practices
+
+1. **When to Use**
+   - Use for route-level errors
+   - Appropriate for critical system failures
+   - Suitable for network connectivity issues
+
+2. **Implementation Guidelines**
+   - Always provide localized error messages
+   - Include retry functionality when the error is recoverable
+   - Consider the context when choosing error messages
+
+3. **Accessibility**
+   - Ensure error messages are clear and actionable
+   - Maintain sufficient contrast for error text
+   - Provide adequate touch targets for retry buttons
+
+#### Example Implementation
+
+```dart
+class ProductListView extends StatelessWidget {
+  const ProductListView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<ProductListCubit, ProductListState>(
+      builder: (context, state) {
+        return switch (state) {
+          // ... loading and success build methods
+          ProductListFailure _ => FullPageError(
+              error: state.error,
+              onRetry: () => context.read<ProductListCubit>().onPullToRefresh(),
+            ),
+        };
+      },
+    );
+  }
+}
+```
+
+### ErrorSnackbar (coming soon)
+For temporary error notifications
+
+### InlineError (coming soon)
+For displaying errors within forms or content
+
+### ErrorBoundary (coming soon)
+For catching and handling widget tree errors
