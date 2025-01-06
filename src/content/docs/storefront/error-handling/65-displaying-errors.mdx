@@ -92,11 +92,7 @@ class ProductListView extends StatelessWidget {
               error: state.error,
               onRetry: () => context.read<ProductListCubit>().onPullToRefresh(),
             ),
-        };
-      },
-    );
-  }
-}
+            // ... rest of code
 ```
 
 ### ErrorSnackbar (coming soon)
