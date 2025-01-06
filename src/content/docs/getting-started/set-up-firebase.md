@@ -12,6 +12,7 @@ sidebar:
 - [Firebase CLI](https://firebase.google.com/docs/cli) installed
 
 ## Installation Steps
+This page closely follows the steps outlined within the following [Code With Andrea guide](https://codewithandrea.com/articles/flutter-firebase-multiple-flavors-flutterfire-cli/).
 
 ### 1. Create a Firebase Project
 

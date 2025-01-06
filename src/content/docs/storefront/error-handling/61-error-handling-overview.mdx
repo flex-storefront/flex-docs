@@ -8,12 +8,14 @@ tableOfContents:
   maxHeadingLevel: 5
 ---
 
-Flex Storefront implements a comprehensive error handling system that manages both expected and unexpected errors. The architecture follows the repository pattern, allowing for flexible service provider integration while maintaining a clean separation of concerns.
+Flex Storefront implements a comprehensive error handling system that manages both expected and unexpected errors. The architecture follows the [repository pattern](https://www.geeksforgeeks.org/repository-design-pattern/), allowing for flexible service provider integration while maintaining a clean separation of concerns, when dealing with expected errors. Unexpected errors, on the other hand, are funneled to Firebase Crashlytics by default. 
+
+Details on the handling of expected errors may be found within [FlexError](../63-flex-error); details pertaining to unexpected errors may be found within [Unhandled Errors](../67-unhandled-errors).
 
 ## Architecture
 
 ### Error Repository
-The error repository pattern is implemented separately from [user interaction logging](../../analytics/51-analytics-overview) for several key reasons:
+The error repository pattern is implemented separately from [user interaction logging](../../analytics/51-analytics-overview), which has its own repository, for several key reasons:
 
 - **Separation of Concerns**: Error logging often requires different service providers and configuration than user analytics
 - **Different Data Models**: Error logs contain stack traces and technical details, while user interactions focus on business metrics
@@ -23,17 +25,17 @@ The error repository pattern is implemented separately from [user interaction lo
 
 ### Error Handler Widgets
 
-Error handler widgets serves as a widget-level error boundaries, capturing errors that occur within its widget subtree. For example, `FullPageError` displays a full-page error screen. More information may be found [here](../65-displaying-errors).
+Error handler widgets serves as a widget-level error boundaries, capturing errors that occur within its widget subtree. For example, `FullPageError` displays a full-page error screen. More information on error handler widgets may be found [here](../65-displaying-errors).
 
 
 ### BlocObserver Integration
 
 The custom `AppBlocObserver` extends Flutter Bloc's `BlocObserver` to provide error handling for state management:
 
-- Error Tracking: Captures and logs errors that occur during state transitions
-- State Validation: Ensures state changes follow expected patterns
-- Performance Monitoring: Tracks bloc lifecycle events for debugging
-- Crash Prevention: Catches and handles errors before they propagate to the UI
+- **Error Tracking**: Captures and logs errors that occur during state transitions
+- **State Validation**: Ensures state changes follow expected patterns
+- **Performance Monitoring**: Tracks bloc lifecycle events for debugging
+- **Crash Prevention**: Catches and handles errors before they propagate to the UI
 
 
 ```dart
@@ -56,43 +58,6 @@ void onError(BlocBase<dynamic> bloc, Object error, StackTrace stackTrace) {
   super.onError(bloc, error, stackTrace);
 }
 ```
-
-Flex Storefront is able to deal errors both expected and unexpected. Expected errors utilize the [repository pattern](https://www.geeksforgeeks.org/repository-design-pattern/) to allow for the switching of service providers for error logging, whereas unexpected errors are, by default, funnled to Firebase Crashlytics. Details on the handling of expected errors may be found within [FlexError](../63-flex-error); details pertaining to unexpected errors may be found within [Unhandled Errors](../67-unhandled-errors).
-
-
-To discuss:
-
-- Error repo
-    - Why separate repo created for error logging vs user interaction logging
-- error_handler widget TODO: rename
-- BlocObserver and it's purpose withi handling errors
-- lib/core/error/error.dart
-    - sealed class representing FlexErrors
-
-
-Sections
-- Overview
-- Handled Errors
-- Unhandled Errors
-- FlexError
-
-
-
-
-## Crash Reporting
-
-### Firebase Crashlytics Integration
-
-Both error handlers report to Firebase Crashlytics, providing:
-- Stack traces
-- Error messages
-- Fatal error flags
-- Device information
-- App state at time of crash
-
-
-
-
 
 ## Internationalization
 
