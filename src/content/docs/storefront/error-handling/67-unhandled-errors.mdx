@@ -1,0 +1,107 @@
+---
+title: Unhandled Errors
+description: Learn how Flex Storefront handles analytics.
+sidebar:
+  order: 67
+tableOfContents:
+  minHeadingLevel: 2
+  maxHeadingLevel: 5
+---
+
+Flex Storefront implements a robust system for catching and reporting unhandled errors **using Firebase Crashlytics**. This ensures that any unexpected errors are properly logged and can be analyzed for debugging and improvement.
+
+## Error Handlers
+
+### Flutter Errors
+
+Flutter-specific errors are caught using `FlutterError.onError`. This handles errors that occur within the Flutter framework.
+
+```dart
+FlutterError.onError = (details) {
+  log(details.exceptionAsString(), stackTrace: details.stack);
+  FirebaseCrashlytics.instance.recordFlutterFatalError(details);
+};
+```
+
+**When is this triggered?**
+- Widget build errors
+- Layout errors
+- Animation errors
+- Other Flutter-specific exceptions
+
+### Platform Dispatcher Errors
+
+Async errors that aren't caught by Flutter's error handler are captured using `PlatformDispatcher.instance.onError`.
+
+```dart
+PlatformDispatcher.instance.onError = (error, stack) {
+  FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+  return true;
+};
+```
+
+**When is this triggered?**
+- Unhandled async errors
+- Platform channel errors
+- Background task errors
+- Isolate errors
+
+
+## Firebase Crashlytics Integration
+
+Both error handlers report to Firebase Crashlytics, providing:
+- Stack traces
+- Error messages
+- Fatal error flags
+- Device information
+- App state at time of crash
+
+### Removing Firebase Crashlytics Integration
+
+Utilizing Firebase Crashlytics for unhandled errors is the system-default. The utilization of Firebase Crashlytics stems from the steps outlined in the [Setting up Firebase guide](../../../getting-started/set-up-firebase).
+
+To remove the Firebase dependency, follow these steps:
+
+1. **Remove Firebase Configuration Files**
+   - Delete the `firebase_options_[flavour].dart` file
+   - Remove corresponding import within the flavor entry-point (`firebase_[flavour].dart`)
+
+2. **Modify Bootstrap Configuration**
+   - Remove the `firebaseOptions` parameter
+   - Remove Firebase initialization
+
+```dart
+Future<void> bootstrap({
+    required FutureOr<Widget> Function() builder,
+    // Remove: required FirebaseOptions firebaseOptions,
+}) async {
+    WidgetsFlutterBinding.ensureInitialized();
+    // Remove: await Firebase.initializeApp(options: firebaseOptions);
+}
+```
+
+3. **Replace Error Handlers**
+   - Update both Flutter and platform-level error handlers
+   - Implement your preferred error reporting solution
+
+```dart
+// Replace Flutter error handler
+FlutterError.onError = (details) {
+    log(details.exceptionAsString(), stackTrace: details.stack);
+    // Replace: FirebaseCrashlytics.instance.recordFlutterFatalError(details);
+    // Add your error reporting solution here
+};
+
+// Replace platform dispatcher error handler
+PlatformDispatcher.instance.onError = (error, stack) {
+    // Replace: FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+    // Add your error reporting solution here
+    return true;
+};
+```
+
+When implementing a custom error reporting solution, ensure it can:
+- Capture and preserve stack traces
+- Handle both synchronous and asynchronous errors
+- Provide adequate debugging information
+- Support error analytics and monitoring
